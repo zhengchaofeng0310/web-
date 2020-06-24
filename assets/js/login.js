@@ -36,7 +36,7 @@ $(function() {
             // console.log(username);
             // console.log(password);
         $.ajax({
-            url: 'http://ajax.frontend.itheima.net/api/reguser',
+            url: '/api/reguser',
             type: 'post',
             dataType: 'json',
             data: {
@@ -56,12 +56,12 @@ $(function() {
     })
 
     $('#btn_b').on('click', function(e) {
-        e.preventDefault
+        e.preventDefault()
         var username = $('#form_login [name=username]').val().trim()
             // console.log(username);
         var password = $('#form_login [name=password]').val().trim()
         $.ajax({
-            url: 'http://ajax.frontend.itheima.net/api/login',
+            url: '/api/login',
             type: 'post',
             dataType: 'json',
             data: {
@@ -69,7 +69,14 @@ $(function() {
                 password: password
             },
             success: function(backData) {
-                console.log(backData);
+                // console.log(backData);
+                if (backData.status != 0) {
+                    return layer.msg(backData.message)
+                } else {
+                    layer.msg('登录成功')
+                }
+                localStorage.setItem('token', backData.token)
+                location.href = '/index.html'
 
             }
         });
