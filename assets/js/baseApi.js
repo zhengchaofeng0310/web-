@@ -6,7 +6,7 @@ $.ajaxPrefilter(function(option) {
             Authorization: localStorage.getItem('token')
         }
         option.complete = function(backData) {
-            console.log(backData);
+            // console.log(backData);
             // console.log(111);
             if (backData.responseJSON.status === 1 && backData.responseJSON.message === '身份认证失败！') {
                 // 1. 强制清空 token
